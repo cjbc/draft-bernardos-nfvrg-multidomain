@@ -1,0 +1,931 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+
+]>
+
+<?rfc toc="yes"?>
+<?rfc tocompact="yes"?>
+<?rfc tocdepth="3"?>
+<?rfc tocindent="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes"?>
+<?rfc comments="yes"?>
+<?rfc inline="yes"?>
+<?rfc compact="yes"?>
+<?rfc subcompact="no"?>
+
+<rfc category="info" docName="draft-bernardos-nfvrg-multidomain-03"
+     ipr="trust200902">
+  <front>
+      <title abbrev="Multi-domain Network Virtualization">
+       Multi-domain Network Virtualization
+      </title>
+
+    <!-- AUTHORS -->
+    <author fullname="Carlos J. Bernardos"
+            initials="CJ."
+            surname="Bernardos">
+      <organization abbrev="UC3M">
+        Universidad Carlos III de Madrid
+      </organization>
+      <address>
+        <postal>
+          <street>Av. Universidad, 30</street>
+          <city>Leganes, Madrid</city>
+          <code>28911</code>
+          <country>Spain</country>
+        </postal>
+        <phone>+34 91624 6236</phone>
+        <email>cjbc@it.uc3m.es</email>
+        <uri>http://www.it.uc3m.es/cjbc/</uri>
+      </address>
+    </author>
+
+    <author fullname="Luis M. Contreras"
+            initials="LM."
+            surname="Contreras">
+      <organization abbrev="TID">
+        Telefonica I+D
+      </organization>
+      <address>
+        <postal>
+          <street>Ronda de la Comunicación, S/N</street>
+          <city>Madrid</city>
+          <code>28050</code>
+          <country>Spain</country>
+        </postal>
+        <email>luismiguel.conterasmurillo@telefonica.com</email>
+      </address>
+    </author>
+
+    <author fullname="Ishan Vaishnavi"
+            initials="I."
+            surname="Vaishnavi">
+      <organization abbrev="Huawei">
+        Huawei Technologies Dusseldorf GmBH
+      </organization>
+      <address>
+        <postal>
+          <street>Riesstrasse 25,</street>
+          <city>Munich</city>
+          <code>80992</code>
+          <country>Germany</country>
+        </postal>
+        <email>Ishan.vaishnavi@huawei.com</email>
+      </address>
+    </author>
+
+    <author fullname="Robert Szabo" initials="R" surname="Szabo">
+        <organization>Ericsson</organization>
+        <address>
+                <postal>
+                      <street>Konyves Kaman krt. 11</street>
+                      <city>Budapest</city>
+                      <region>EMEA</region>
+                      <code>1097</code>
+                      <country>Hungary</country>
+                </postal>
+                <phone>+36703135738</phone>
+                <email>robert.szabo@ericsson.com</email>
+        </address>
+    </author>
+
+    <date month="September" year="2017" />
+
+    <area>Internet</area>
+
+    <workgroup>NFV RG</workgroup>
+
+    <abstract>
+
+      <t>
+This draft analyzes the problem of multi-provider multi-domain orchestration,
+by first scoping the problem, then looking into potential architectural
+approaches, and finally describing the solutions being developed by the
+European 5GEx project. 
+      </t>
+
+      <t>
+      </t>
+
+    </abstract>
+
+<!--
+    <note title="Requirements Language">
+
+      <t>
+      The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+      "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+      document are to be interpreted as described in <xref
+      target="RFC2119">RFC 2119</xref>.
+      </t> 
+
+    </note>
+-->
+
+  </front>
+
+  <middle>
+
+    <section anchor="sec:introduction" title="Introduction">
+
+      <t>
+The telecommunications sector is experiencing a major revolution that will shape
+the way networks and services are designed and deployed for the next decade.
+We are witnessing an explosion in the number of applications and services
+demanded by users, which are now really capable of accessing them on the move.
+In order to cope with such a demand, some network operators are looking at the
+cloud computing paradigm, which enables a potential reduction of the overall
+costs by outsourcing communication services from specific hardware in the
+operator's core to server farms scattered in datacenters. These services have
+different characteristics if compared with conventional IT services that have to
+be taken into account in this cloudification process. Also the transport network
+is affected in that it is evolving to a more sophisticated form of IP
+architecture with trends like separation of control and data plane traffic, and
+more fine-grained forwarding of packets (beyond looking at the destination IP
+address) in the network to fulfill new business and service goals. 
+      </t>
+
+      <t>
+Virtualization of functions also provides operators with tools to deploy new
+services much faster, as compared to the traditional use of monolithic and
+tightly integrated dedicated machinery. As a natural next step, mobile network
+operators need to re-think how to evolve their existing network infrastructures
+and how to deploy new ones to address the challenges posed by the increasing
+customers' demands, as well as by the huge competition among operators. All
+these changes are triggering the need for a modification in the way operators
+and infrastructure providers operate their networks, as they need to
+significantly reduce the costs incurred in deploying a new service and operating
+it. Some of the mechanisms that are being considered and already adopted by
+operators include: sharing of network infrastructure to reduce costs,
+virtualization of core servers running in data centers as a way of supporting
+their load-aware elastic dimensioning, and dynamic energy policies to reduce the
+monthly electricity bill. However, this has proved to be tough to put in
+practice, and not enough. Indeed, it is not easy to deploy new mechanisms in a
+running operational network due to the high dependency on proprietary (and
+sometime obscure) protocols and interfaces, which are complex to manage and
+often require configuring multiple devices in a decentralized way. 
+      </t>
+
+      <t>
+Network Function Virtualization (NFV) and Software Defined Networking (SDN) are
+changing the way the telecommunications sector will deploy, extend and operate
+their networks. TBD: add multi-domain.
+      </t>
+
+    </section>
+
+    <section anchor="sec:terminology" title="Terminology">
+
+      <t>
+The following terms used in this document are defined by the ETSI NVF ISG, and
+the ONF and the IETF:
+
+        <list style="empty">
+
+          <t>NFV Infrastructure (NFVI): totality of all hardware and software
+          components which build up the environment in which VNFs are
+          deployed</t>
+
+          <t>NFV Management and Orchestration (NFV-MANO): functions collectively
+          provided by NFVO, VNFM, and VIM.</t>
+
+          <t>NFV Orchestrator (NFVO): functional block that manages the Network
+          Service (NS) lifecycle and coordinates the management of NS lifecycle,
+          VNF lifecycle (supported by the VNFM) and NFVI resources (supported by
+          the VIM) to ensure an optimized allocation of the necessary resources
+          and connectivity.</t>
+
+          <t>Network Service Orchestration (NSO): function responsible for the
+          Network Service lifecycle management, including operations such as:
+          On-board Network Service, Instantiate Network Service, Scale Network
+          Service, Update Network Service, etc.</t>
+
+          <t>OpenFlow protocol (OFP): allowing vendor independent programming of
+          control functions in network nodes.</t>
+
+          <t>Resource Orchestration (RO): subset of NFV Orchestrator functions
+          that are responsible for global resource management governance.</t>
+
+          <t>Service Function Chain (SFC): for a given service, the abstracted
+          view of the required service functions and the order in which they are
+          to be applied. This is somehow equivalent to the Network Function
+          Forwarding Graph (NF-FG) at ETSI.</t>
+
+          <t>Service Function Path (SFP): the selection of specific service
+          function instances on specific network nodes to form a service graph
+          through which an SFC is instantiated.</t>
+
+          <t>Virtualized Infrastructure Manager (VIM): functional block that is
+          responsible for controlling and managing the NFVI compute, storage and
+          network resources, usually within one operator's Infrastructure
+          Domain.</t>
+
+          <t>Virtualized Network Function (VNF): implementation of a Network
+          Function that can be deployed on a Network Function Virtualization
+          Infrastructure (NFVI).</t>
+
+          <t>Virtualized Network Function Manager (VNFM): functional block that
+          is responsible for the lifecycle management of VNF.</t>
+
+        </list>
+
+      </t>
+
+    </section>
+
+    <section anchor="sec:background" title="Background: the ETSI NFV
+                                            architecture">
+
+      <t>
+The ETSI ISG NFV is a working group which, since 2012, aims to evolve
+quasi-standard IT virtualization technology to consolidate many network
+equipment types into industry standard high volume servers, switches, and
+storage. It enables implementing network functions in software that can run on a
+range of industry standard server hardware and can be moved to, or loaded in,
+various locations in the network as required, without the need to install new
+equipment. To date, ETSI NFV is by far the most accepted NFV reference framework
+and architectural footprint <xref target="etsi_nvf_whitepaper" />. The ETSI NFV
+framework architecture framework is composed of three domains
+(<xref target="fig:nfv_framework" />):
+
+        <list style="symbols" >
+
+          <t>
+Virtualized Network Function, running over the NFVI.
+          </t>
+
+          <t>
+NFV Infrastructure (NFVI), including the diversity of physical resources and how
+these can be virtualized. NFVI supports the execution of the VNFs.
+          </t>
+
+          <t>
+NFV Management and Orchestration, which covers the orchestration and life-cycle
+management of physical and/or software resources that support the infrastructure
+virtualization, and the life-cycle management of VNFs. NFV Management and
+Orchestration focuses on all virtualization specific management tasks necessary
+in the NFV framework.
+          </t>
+
+        </list>
+
+      </t>
+
+<figure anchor="fig:nfv_framework" title="ETSI NFV framework" >
+<artwork><![CDATA[
++-------------------------------------------+  +---------------+
+|   Virtualized Network Functions (VNFs)    |  |               |
+|  -------   -------   -------   -------    |  |               |
+|  |     |   |     |   |     |   |     |    |  |               |
+|  | VNF |   | VNF |   | VNF |   | VNF |    |  |               |
+|  |     |   |     |   |     |   |     |    |  |               |
+|  -------   -------   -------   -------    |  |               |
++-------------------------------------------+  |               |
+                                               |               |
++-------------------------------------------+  |               |
+|         NFV Infrastructure (NFVI)         |  |      NFV      |
+| -----------    -----------    ----------- |  |  Management   |
+| | Virtual |    | Virtual |    | Virtual | |  |      and      |
+| | Compute |    | Storage |    | Network | |  | Orchestration |
+| -----------    -----------    ----------- |  |               |
+| +---------------------------------------+ |  |               |
+| |         Virtualization Layer          | |  |               |
+| +---------------------------------------+ |  |               |
+| +---------------------------------------+ |  |               |
+| | -----------  -----------  ----------- | |  |               |
+| | | Compute |  | Storage |  | Network | | |  |               |
+| | -----------  -----------  ----------- | |  |               |
+| |          Hardware resources           | |  |               |
+| +---------------------------------------+ |  |               |
++-------------------------------------------+  +---------------+
+]]></artwork>
+</figure>      
+
+      <t>
+The NFV architectural framework identifies functional blocks and the main
+reference points between such blocks. Some of these are already present in
+current deployments, whilst others might be necessary additions in order to
+support the virtualization process and consequent operation. The functional
+blocks are (<xref target="fig:nfv_arch" />):
+
+        <list style="symbols" >
+
+          <t>
+Virtualized Network Function (VNF).
+          </t>
+
+          <t>
+Element Management (EM).
+          </t>
+
+          <t>
+NFV Infrastructure, including: Hardware and virtualized resources, and
+Virtualization Layer. 
+          </t>
+
+          <t>
+Virtualized Infrastructure Manager(s) (VIM).
+          </t>
+
+          <t>
+NFV Orchestrator.
+          </t>
+
+          <t>
+VNF Manager(s).
+          </t>
+
+          <t>
+Service, VNF and Infrastructure Description. 
+          </t>
+
+          <t>
+Operations and Business Support Systems (OSS/BSS).
+          </t>
+
+        </list>
+
+      </t>
+
+<figure anchor="fig:nfv_arch" title="ETSI NFV reference architecture" >
+<artwork><![CDATA[
+                                               +--------------------+
++-------------------------------------------+  | ----------------   |
+|                 OSS/BSS                   |  | | NFV          |   |
++-------------------------------------------+  | | Orchestrator +-- |
+                                               | ---+------------ | |
++-------------------------------------------+  |    |             | |
+|  ---------     ---------     ---------    |  |    |             | |
+|  | EM 1  |     | EM 2  |     | EM 3  |    |  |    |             | |
+|  ----+----     ----+----     ----+----    |  | ---+----------   | |
+|      |             |             |        |--|-|    VNF     |   | |
+|  ----+----     ----+----     ----+----    |  | | manager(s) |   | |
+|  | VNF 1 |     | VNF 2 |     | VNF 3 |    |  | ---+----------   | |
+|  ----+----     ----+----     ----+----    |  |    |             | |
++------|-------------|-------------|--------+  |    |             | |
+       |             |             |           |    |             | |
++------+-------------+-------------+--------+  |    |             | |
+|         NFV Infrastructure (NFVI)         |  |    |             | |
+| -----------    -----------    ----------- |  |    |             | |
+| | Virtual |    | Virtual |    | Virtual | |  |    |             | |
+| | Compute |    | Storage |    | Network | |  |    |             | |
+| -----------    -----------    ----------- |  | ---+------       | |
+| +---------------------------------------+ |  | |        |       | |
+| |         Virtualization Layer          | |--|-| VIM(s) +-------- |
+| +---------------------------------------+ |  | |        |         |
+| +---------------------------------------+ |  | ----------         |
+| | -----------  -----------  ----------- | |  |                    |
+| | | Compute |  | Storage |  | Network | | |  |                    |
+| | | hardware|  | hardware|  | hardware| | |  |                    |
+| | -----------  -----------  ----------- | |  |                    |
+| |          Hardware resources           | |  |  NFV Management    |
+| +---------------------------------------+ |  | and Orchestration  |
++-------------------------------------------+  +--------------------+
+]]></artwork>
+</figure>      
+
+    </section>
+
+    <section anchor="sec:ps" title="Multidomain problem statement">
+
+      <t>
+Market fragmentation results from having a multitude of telecommunications
+network and cloud operators each with a footprint focused to a specific region.
+This makes it difficult to deploy cost effective infrastructure services, such
+as virtual connectivity or compute resources, spanning multiple countries as no
+single operator has a big enough footprint. Even if operators largely aim to
+provide the same infrastructure services (VPN connectivity, compute resources
+based on virtual machines and block storage), inter-operator collaboration
+tools for providing a service spanning several administrative boundaries are
+very limited and cumbersome. This makes service development and provisioning
+very time consuming. For example, having a VPN with end-points in several
+countries, in order to connect multiple sites of a business (such as a hotel
+chain), requires contacting several network operators. Such an approach is
+possible only with significant effort and integration work from the side of
+the business. This is not only slow, but also inefficient and expensive, since
+the business also needs to employ networking specialists to do the integration
+instead of focusing on its core business
+      </t>
+
+      <t>
+Technology fragmentation also represents a major bottleneck internally for an
+operator. Different networks and different parts of a network may be built as
+different domains using separate technologies, such as optical or packet
+switched (with different packet switching paradigms included); having equipment
+from different vendors; having different control paradigms, etc. Managing and
+integrating these separate technology domains requires substantial amount of
+effort, expertise, and time. The associated costs are paid by both network
+operators and vendors alike, who need to design equipment and develop complex
+integration features. In addition to technology domains, there are other
+reasons for having multiple domains within an operator, such as, different
+geographies, different performance characteristics, scalability, policy or
+simply historic (e.g., result of a merge or an acquisition). Multiple domains
+in a network are a necessary and permanent feature however, these should not
+be a roadblock towards service development and provisioning, which should be
+fast and efficient.
+      </t>
+
+      <t>
+A solution is needed to deal with both the multi-operator collaboration issue,
+and address the multi-domain problem within a single network operator. While
+these two problems are quite different, they also share a lot of common aspects
+and can benefit from having a number of common tools to solve them.
+      </t>
+
+    </section>
+
+	
+    <section anchor="sec:modes" title="Multi-domain architectural approaches">
+
+      <t>
+This section summarizes different architectural options that can be considered
+to tackle the multi-domain orchestration problem.
+      </t>
+
+     <section anchor="sec:etsi" title="ETSI NFV approaches">
+
+       <t>
+Recently, the ETSI NFV ISG has started to look into viable architectural
+options supporting the placement of functions in different administrative
+domains. In the document <xref target="etsi_nvf_ifa009" />, different
+approaches are considered, which we summarize next.
+       </t>
+
+       <t>
+The first option (shown in <xref target="fig:nfv_ifa009_a" />) is based on a
+split of the NFVO into Network Service Orchestrator (NSO) and Resource
+Orchestrator (RO). A use case that this separation could enable is the
+following: a network operator offering its infrastructure to different
+departments within the same operator, as well as to a different network
+operator like in cases of network sharing agreements. In this scenario, an
+administrative domain can be defined as one or more data centers and VIMs,
+providing an abstracted view of the resources hosted in it.
+       </t>
+
+       <t>
+A service is orchestrated out of VNFs that can run on infrastructure provided
+and managed by another Service Provider. The NSO manages the lifecycle of
+network services, while the RO provides an overall view of the resources
+present in the administrative domain to which it provides access and hides the
+interfaces of the VIMs present below it.
+       </t>
+
+<figure anchor="fig:nfv_ifa009_a" title="Infrastructure provided using multiple
+        administrative domains (from ETSI GS NFV-IFA 009 V1.1.1)" >
+<artwork><![CDATA[
+                          -------
+                          | NSO |
+                         /-------\
+                        /         \
+            --------   /  -------- \    --------
+            | VNFM |   |  | VNFM |  |   | VNFM |
+            --------  /   --------   \  --------
+               / ____/      /  \      \____ \
+              / / _________/    \_________ \ \
+             / / /                        \ \ \
++-----------/-/-/---------+     +----------\-\-\----------+
+|        ---------        |     |        ---------        |
+|        |  RO   |        |     |        |  RO   |        |
+|        ---------        |     |        ---------        |
+|       /    |    \       |     |       /    |    \       |
+|      /     |     \      |     |      /     |     \      |
+|     /      |      \     |     |     /      |      \     |
+| ------- ------- ------- |     | ------- ------- ------- |
+| |VIM 1| |VIM 2| |VIM 3| |     | |VIM 1| |VIM 2| |VIM 3| |
+| ------- ------- ------- |     | ------- ------- ------- |
+| Administrative domain A |     | Administrative domain B |
++-------------------------+     +-------------------------+ 
+]]></artwork>
+</figure>
+
+       <t>
+The second option (shown in <xref target="fig:nfv_ifa009_b" />) is based on
+having an umbrella NFVO. A use case enabled by this is the following: a Network
+Operator offers Network Services to different departments within the same
+operator, as well as to a different network operator like in cases of
+network sharing agreements. In this scenario, an administrative domain is
+compose of one or more Datacentres, VIMs, VNFMs (together with their related
+VNFs) and NFVO, allowing distinct specific sets of network services to be
+hosted and offered on each. 
+       </t>
+
+       <t>
+A top Network Service can include another Network Service. A Network Service
+containing other Network Services might also contain VNFs. The NFVO in each
+admin domain provides visibility of the Network Services specific to this admin
+domain. The umbrella NFVO is providing the lifecycle management of umbrella
+network services defined in this NFVO. In each admin domain, the NFVO is
+providing standard NFVO functionalities, with a scope limited to the network
+services, VNFs and resources that are part of its admin domain. 
+       </t>
+
+<figure anchor="fig:nfv_ifa009_b" title="Network services provided using
+        multiple administrative domains (from ETSI GS NFV-IFA 009 V1.1.1)" >
+<artwork><![CDATA[
+                        ------------
+                        | Umbrella |
+                        |   NFVO   |
+                        ------------
+                           / |  \
+                         /   |    \
+                        / -------- \
+                       /  | VNFM |  \
+                     /    --------    \
+                    /        |         \
+                  /       -------        \
+                 /        |VIM 1|         \
+               /          -------           \
+--------------/------------     -------------\-------------
+|        --------         |     |        --------         |
+|        | NFVO |         |     |        | NFVO |         |
+|        --------         |     |        --------         |
+|          | | |          |     |          | | |          |
+| -------- | | | -------- |     | -------- | | | -------- |
+| | VNFM | | | | | VNFM | |     | | VNFM | | | | | VNFM | |
+| -------- | | | -------- |     | -------- | | | -------- |
+|   |  \__/__|__\_/_   |  |     |   |  \__/__|__\_/_   |  |
+|   |  __/___|___/\ \  |  |     |   |  __/___|___/\ \  |  |
+|   | / /    |     \ \ |  |     |   | / /    |     \ \ |  |
+| ------- ------- ------- |     | ------- ------- ------- |
+| |VIM 1| |VIM 2| |VIM 3| |     | |VIM 1| |VIM 2| |VIM 3| |
+| ------- ------- ------- |     | ------- ------- ------- |
+| Administrative domain A |     | Administrative domain B |
++-------------------------+     +-------------------------+ 
+]]></artwork>
+</figure>
+
+       <t>
+More recently, ETSI NFV has released a new whitepaper, titled "Network Operator
+Perspectives on NFV priorities for 5G" <xref target="etsi_nvf_whitepaper_5g" />,
+which provides network operator perspectives on NFV priorities for 5G and
+identifies common technical features in terms of NFV. This whitepaper identifies
+multi-site/multi-tenant orchestration as one key priority. ETSI highlights the
+support of Infrastructure as a Service (IaaS), NFV as a Service (NFVaaS) and
+Network Service (NS) composition in different administrative domains (for
+example roaming scenarios in wireless networks) as critical for the 5G work.
+       </t>
+
+       <t>
+Related to this, a new Work Item, IFA028, and titled as “Report on architecture
+options to support multiple administrative domains” has been approved.
+       </t>
+
+     </section>
+
+     <section anchor="sec:hierarchical" title="Hierarchical">
+
+       <t>
+Considering the potential split of the NFVO into a Network
+Service Orchestrator (NSO) and a Resource Orchestrator (RO),
+multi-provider hierarchical interfaces may exist at
+their northbound APIs. <xref target="fig:hierarchical_overview"/>
+illustrates the various interconnection options, namely:
+
+          <list style="empty">
+            <t>E/NSO (External NSO): an evolved NFVO northbound API
+              based on Network Service (NS).</t>
+            <t>E/RO (External RO): VNF-FG oriented resource embedding
+              service. A received VNF-FG that is mapped to the northbound
+              resource view is embedded into the distributed resources
+              collected from southbound, i.e., VNF-FG_in = VNF-FG_out_1
+              + VNF-FG_out_2 + ... + VNF-FG_out_N, where VNF-FG_out_j
+              corresponds to a spatial embedding to subordinate domain
+              "j". For example, Provider 3's MP-NFVO/RO creates VNF-FG
+              corresponding to its E/RO and E/VIM sub-domains.</t>
+            <t>E/VIM (External VIM): a generic VIM interface offered
+              to an external consumer. In this case the NFVI-PoP may
+              be shared for multiple consumers, each seeing a
+              dedicated NFVI-PoP. This corresponds to IaaS
+              interface.</t>
+            <t>I/NSO (Internal NSO): if a Multi-provider NSO (MP-NSO)
+              is separated from the provider's operational NSO, e.g.,
+              due to different operational policies, the MP-NSO may
+              need this interface to realize its northbound E/NSO
+              requests. Provider 1 illustrates a scenario the MP-NSO
+              and the NSO are logically separated. Observe that
+              Provider 1's tenants connect to the NSO and MP-NSO
+              corresponds to "wholesale" services.</t>
+            <t>I/RO (Internal RO): VNF-FG oriented resource embedding
+              service. A received VNF-FG that is mapped to the northbound
+              resource view is embedded into the distributed resources
+              collected from southbound, i.e., VNF-FG_in = VNF-FG_out_1
+              + VNF-FG_out_2 + ... + VNF-FG_out_N, where VNF-FG_out_j
+              corresponds to a spatial embedding to subordinate domain
+              "j". For example, Provider 1's MP-NFVO/RO creates VNF-FG
+              corresponding to its I/RO and I/VIM sub-domains.</t>
+            <t>I/VIM (Internal VIM): a generic VIM interface at an
+              NFVI-PoP.</t>
+            <t>Nfvo-Vim: a generic VIM interface between a
+              (monolithic) NFVO and a VIM.</t>
+	  </list>
+	</t>
+
+<t>
+We would like to explore use-cases and potential benefits for the
+above multi-provider interfaces as well as to learn
+how much they may differ from their existing counterparts. For
+example, are (E/RO, I/RO), (E/NSO, I/NSO), (E/VIM, I/VIM)
+pairs different?
+</t>
+
+<figure anchor="fig:hierarchical_overview" title="NSO-RO Split:
+	  possible multi-provider APIs - an illustration" >
+<artwork><![CDATA[
+                                          Tenants
+                          *    Provider      |
+   *                       *   Domain 4   +--+-----------+
+    *                       *             |MP-NFVO/NSO:  |
+     *                       *            |Network Serv. |
+      *   Provider            *           |Orchestrator  |
+       *  Domain 3             *          +--+-----------+
+        *              Tenants  *            |E/RO
+         *                |      ************|*************
+          *              ++-------------+    |
+           *             |MP-NFVO/NSO:  |    |
+   Provider *            |Network Serv. |    |
+   Domain 1  *           |Orchestrator  |    |
+              *          +-+-----+------+    |
+               *      E/NSO|     | I/RO     /
+                *.---------'   +-+---------+--+
+                /*             |MP-NFVO/RO:   |
+               /  *            |Rersource     |
+Tenants       /    *           |Orchestrator  |
+|             |     *          +--+---+-------+
+| +-----------+--+   *************|***|********************
+| |MP-NFVO/NSO:  |                |  * \           Provider
+| |Network Serv. |         E/RO  /   *  \ E/VIM    Domain 2
+| |Orchestrator  |  .-----------'    *   `-------.
+| +-+------+-----+  |                *           |
+|   |I/NSO |I/RO    |                *           |
+|   |   +--+--------+--+             *           |
+|   |   |MP-NFVO/RO:   |             *           |
+|   |   |Rersource     |             *           |
+ \  |   |Orchestrator  |             *    +------+-------+
+  \ |   +----+---- --+-+             *    |VIM:          |
+ +--+-----+  |I/RO   |I/VIM          *    |Virtualized   |
+ |NFVO/NSO|  |       |               *    |Pys mapping   |
+ +------+-+  |       |               *    +--------------+
+    I/RO|    |       |               *
+ +------+----+---+   |               *
+ |    NFVO/RO    |   |               *
+ ++-------------++   |               *
+  |Nfvo-Vim     |    |               *
+ ++-------+    ++----+--+            *
+ |WIM|VIM ||   |VIM|WIM |            *
+ +--------+|   +--------+            *
+  +--------+                         *
+]]></artwork>
+</figure>      
+
+
+      </section> 
+
+      <section anchor="sec:cascading" title="Cascading">
+
+        <t>
+Cascading is an alternative way of relationship among providers, from the
+network service point of view. In this case, service decomposition is
+implemented in a paired basis. This can be extended in a recursive manner, then
+allowing for a concatenation of cascaded relations between providers.
+        </t>
+
+        <t>
+As a complement to this, from a service perspective, the cascading of two
+remote providers (i.e., providers not directly interconnected) could require
+the participation of a third provider (or more) facilitating the necessary
+communication among the other two. In that sense, the final service involves
+two providers while the connectivity imposes the participation of more parties
+at resource level.
+        </t>
+
+      </section> 
+
+    </section>	
+
+
+    <section anchor="sec:5gex" title="Virtualization and Control for
+                                      Multi-Provider Multi-Domain">
+
+      <t>
+Orchestration operation in multi-domain is somewhat different from that in a
+single domain as the assumption in single domain single provider orchestration
+is that the orchestrator is aware of the entire topology and resource
+availability within its domain as well as has complete control over those
+resources. This assumption of technical control cannot be made in a multi domain
+scenario, furthermore the assumption of the knowledge of the resources and
+topologies cannot be made across providers. In such a scenario solutions are
+required that enable the exchange of relevant information across these
+orchestrators. This exchange needs to be standardized as shown in
+<xref target="fig:multi_domain_arch" />.
+      </t>
+
+<figure anchor="fig:multi_domain_arch" title="Multi Domain Multi Provider
+                                              reference architecture" >
+<artwork><![CDATA[
+                |                               |
+                + IF1                           +
+           _____|____                       ____|_____
+          |   Multi  |        IF2          |   Multi  | 
+          | Provider |<--------+---------->| Provider |
+          |___Orch___|                     |___Orch___|
+               /\                               /\
+              /  \                             /  \
+             /    \ IF3                       /    \
+     _______/__   _\_________        ________/_    _\________
+    |  Domain  | |  Domain  |       |  Domain  |  |  Domain  | 
+    |___Orch___| |___Orch___|       |___Orch___|  |___Orch___|
+]]></artwork>
+</figure>
+
+      <t>
+The figure shows the Multi Provider orchestrator exposing an interface 1 (IF1)
+to the tenant, interface 2 (IF2) to other Multi Provider Orchestrator (MPO) and
+an interface 3 (IF3) to individual domain orchestratrators. Each one of these
+interfaces could be a possible standardization candidate. Interface 1 is exposed
+to the tennnt who could request his specific services and/or slices to be
+deployed. Interface 2 is between the orchestrator and is a key interface to
+enable multi-provider operation. Interface 3 focuses on abstracting the
+technology or vendor dependent implementation details to support orchestration. 
+      </t>
+
+      <t>
+The proposed operation of the MPO follows three main technical steps. First,
+over interface 2 various functions such as abstracted topology discovery,
+pricing and service details are detected. Second, once a request for deploying
+a service is received over interface 1 the Multi Provider Orchestrator evaluates
+the best orchestrators to implement parts of this request. The request to deploy
+these parts are sent to the different domain orchestrators over IF2 and IF3 and
+the acknowledgement that these are deployed in different domain are received
+back over those interfaces. Third, on receipt of the acknowledgement the slice
+specific assurance management is started  within the MPO. This assurance
+function collects the appropriate information over IF2 and IF3 and reports the
+performance back to the tenant over IF1. The assurance is also responsible for
+detecting any failures in the service and violations in the SLA and
+recomending to the orchestration engine the reconfiguration of the service or
+slice which again needs to performed over IF2 and IF3. 
+      </t>
+
+      <t>
+Each of the three steps is assigned to a specific block in our high level
+architecture shown in <xref target="fig:mpo_arch" />. 
+      </t>
+
+<figure anchor="fig:mpo_arch" title="Detailed MPO reference
+                                              architecture" >
+<artwork><![CDATA[
+                |                                    |
+                + IF1                                +
+  ______________|______________                  ____|_____
+ |      Multi Provider Orch    |                |  Multi   | 
+ | ______   ________   _______ |<------+------->| Provider |
+ ||Assur-| |        | | Catal-||      IF2       |___Orch___|
+ ||-ance | |  NFVO  | | logue ||
+ || Mgmt.| |        | | Topo. || 
+ ||______| |________| |_Mgmt._||
+ |_____________________________| 
+               /\
+              /  \ IF3      
+]]></artwork>
+</figure>      
+
+      <t>
+The catalogue and topology management system is responsible for step 1. It
+discovers the service as well as the resources exposed by the other domains
+both on IF2 and IF3. The combination of these services with coverage over the
+detected topology is provided to the user over IF1. In turn the catalogue and
+topology management system is also responsible for exposing the topology and
+service deployment capabilities to the other domain. The exposure over
+interface 2 to other MPO maybe abstracted and the mapping of this abstracted
+view to the real view when requested byt he NFVO. 
+      </t>
+
+      <t>
+The NFVO (Network Function Virtualization Orchestrator) is responsible for the
+second step. It deploys the service or slice as is received from the tenant
+over IF2 and IF3. It then hands over the deployment decisions to the Assurance
+managmeent subsystem which use this information to collect the periodic
+monitoring tickets in step 3. On the other end it is responsible for receiving
+the request over IF2 to deploy a part of the service, consult with the
+catalogue and topology management system on the translation of the abstraction
+to the received request and then for the actual deployment over the domains
+using IF3. The result of this deployment and the management and control handles
+to access the deployed slice or service is then returned to the requesting MPO. 
+      </t>
+
+      <t>
+The assurance management component periodically studies the collected results
+to report the overall service performance to the tenant or the requesting MPO
+as well as to ensure that the service is functioning within the specified
+parameters. In case of failures or violations the Assurance management system
+recomends reconfigurations to the NFVO.  
+      </t>
+
+      <section anchor="sec:interfaces" title="Interworking interfaces">
+
+        <t>
+In this section we provide more details on the interworking interfaces of the
+MPO reference architecture. Each interface IF1, IF2 and IF3 is broken down into
+several sub-interfaces. Each of them has a clear scope and functionality. [Ed.
+note: more details will be added in future releases of this document]
+        </t>
+
+        <t>
+For multi provider Network Service orchestration, the Multi-domain Orchestrator
+(MdO) offers Network Services by exposing an OSS/BSS - NFVO interface to other
+MPOs belonging to other providers. For multi-provider resource orchestration,
+the MPO presents a VIM-like view and exposes an extended NFVO - VIM interface to
+other MPOs. The MPO exposes a northbound sub-interface (IF1-S) through which an
+MPO customer sends the initial request for services. It handles command and
+control functions to instantiate network services. Such functions include
+requesting the instantiation and interconnection of Network Functions (NFs). A
+sub-interface IF2-S is defined to perform similar operations between MPOs of
+different administrative domains. A set of sub-interfaces -- IF3-R and IF2-R --
+are used to keep an updated global view of the underlying infrastructure
+topology exposed by domain orchestrators. The service catalogue exposes
+available services to customers on a sub-interface IF1-C and to other MPO
+service operators on sub-interface IF2-C. Resource orchestration related
+interfaces are broken up to IF2-RC, IF2-RT, IF2-RMon to reflect resource
+control, resource topology and resource monitoring respectively. Furthermore,
+the sub-interfaces introduced before are generalised and also used for
+interfaces IF3 and IF1.
+        </t>
+
+      </section>
+
+
+    </section>
+
+
+    <section anchor="sec:iana" title="IANA Considerations">
+
+      <t>
+N/A.
+      </t>
+
+    </section>
+
+
+    <section anchor="sec:security" title="Security Considerations">
+
+      <t>
+TBD.
+      </t>
+
+    </section>
+
+    <section anchor="Acknowledgments" title="Acknowledgments">
+
+      <t>
+This work is supported by 5G-PPP 5GEx, an innovation action project partially
+funded by the European Community under the H2020 Program (grant agreement no.
+671636). The views expressed here are those of the authors only. The European
+Commission is not liable for any use that may be made of the information in
+this presentation.
+      </t>
+
+    </section>
+
+  </middle>
+
+  <back>
+
+<!--
+    <references title="Normative References">
+      &rfc2119;
+    </references>
+-->
+
+    <references title="Informative References">
+
+      <reference anchor="etsi_nvf_whitepaper">
+        <front>
+          <title>Network Functions Virtualisation (NFV). White Paper 2</title>
+          <author fullname="ETSI NFV ISG"/>
+          <date year="2014" month="October"/>
+        </front>
+      </reference>
+
+      <reference anchor="etsi_nvf_ifa009">
+        <front>
+          <title>Report on Architectural Options, ETSI GS NFV-IFA 009
+                 V1.1.1</title>
+          <author fullname="ETSI NFV ISG"/>
+          <date year="2016" month="July"/>
+        </front>
+      </reference>
+
+      <reference anchor="etsi_nvf_whitepaper_5g">
+        <front>
+          <title>Network Functions Virtualisation (NFV). White Paper on "Network Operator Perspectives on NFV priorities for 5G"</title>
+          <author fullname="ETSI NFV ISG"/>
+          <date year="2017" month="February"/>
+        </front>
+      </reference>
+
+    </references>
+
+  </back>
+
+</rfc>
