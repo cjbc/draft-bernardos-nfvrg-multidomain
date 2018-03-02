@@ -975,9 +975,32 @@ The Service Catalogue stores information on network services and available VNFs
 and uses I2-C interfaces (either bilateral or advertised) to advertise and 
 updating such offered services to other operators.
 To enable inter-provider service decomposition, multi-operator topology and 
-peering relationships need to be advertised. Providers advertise basic inter-provider topologies using the I2-RT-advertse interface including, optionally, abstracted network resources and IT resource capabilities and locations. Basic advertisement takes place between adjacent operators. These information are collected, filtered by policy rules and propagated hop-by-hop. In 5GEx, the I2-RT-advertise interfaces utilizes BGP-LS protocol. Moreover, providers establish point-to-point bilateral (i.e., direct and exclusive) communications to exchange additional topology and business information, using the I2-RT-bilateral interface.  
-Service decomposition may imply the instantiation of traffic-engineered multi-provider connectivity, subject to constraints such as guaranteed bandwidth, latency or minimum TE metric. The multi-domain PCE (MD-PCE) receives the connectivity request from the inter-provider NFVO and performs inter-operator path computation to instantiate QoS-based connectivity between two VNFs (e.g., Label Switched Paths). Two procedures are run sequentially: 1) operators/domain sequence computation, based on the topology database, provided by Topology Distribution module, and on specific policies (e.g., business, bilateral) 2) per-operator connectivity computation and instantiation. In 5GEx, MD-PCE is stateful (i.e., current connectivity information is stored inside the PCE) and inter-operator detailed computation is performed resorting to the stateful Backward Recursive PCE-based computation (BRPC) [draft-stateful-BRPC], deploying a chain of PCEP sessions among adjacent operators, each one responsible of computing and deploying its segment. Backward recursive procedure allows optimal e2e constrained path computation results.
-
+peering relationships need to be advertised. Providers advertise basic 
+inter-provider topologies using the I2-RT-advertse interface including, 
+optionally, abstracted network resources and IT resource capabilities and 
+locations. Basic advertisement takes place between adjacent operators. These
+information are collected, filtered by policy rules and propagated hop-by-hop.
+In 5GEx, the I2-RT-advertise interfaces utilizes BGP-LS protocol. Moreover, 
+providers establish point-to-point bilateral (i.e., direct and exclusive) 
+communications to exchange additional topology and business information,
+using the I2-RT-bilateral interface.  
+Service decomposition may imply the instantiation of traffic-engineered
+multi-provider connectivity, subject to constraints such as guaranteed bandwidth,
+latency or minimum TE metric. The multi-domain PCE (MD-PCE) receives the 
+connectivity request from the inter-provider NFVO and performs inter-operator
+path computation to instantiate QoS-based connectivity between two VNFs
+(e.g., Label Switched Paths). Two procedures are run sequentially:
+1) operators/domain sequence computation, based on the topology database, 
+provided by Topology Distribution module, and on specific policies 
+(e.g., business, bilateral)
+2) per-operator connectivity computation and instantiation.
+In 5GEx, MD-PCE is stateful (i.e., current connectivity information is stored
+inside the PCE) and inter-operator detailed computation is performed resorting
+to the stateful Backward Recursive PCE-based computation (BRPC) 
+[draft-stateful-BRPC], deploying a chain of PCEP sessions among adjacent 
+operators, each one responsible of computing and deploying its segment. 
+Backward recursive procedure allows optimal e2e constrained path computation 
+results.
 
 
 7.  IANA Considerations
@@ -1057,8 +1080,21 @@ Internet-Draft     Multi-domain Network Virtualization    September 2017
    Phone: +36703135738
    Email: robert.szabo@ericsson.com
 
+   Francesco Paolucci
+   Scuola Superiore Sant'Anna
+   Via Giuseppe Moruzzi, 1
+   56124 Pisa (PI)
+   Italy
+   Phone: +395492124
+   Email: fr.paolucci@santannapisa.it
 
-
+   Andrea Sgambelluri
+   Scuola Superiore Sant'Anna
+   Via Giuseppe Moruzzi, 1
+   56124 Pisa (PI)
+   Italy
+   Phone: +395492118
+   Email: a.sgambelluri@santannapisa.it
 
 
 
