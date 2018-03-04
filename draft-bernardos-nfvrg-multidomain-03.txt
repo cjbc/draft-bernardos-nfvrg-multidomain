@@ -5,7 +5,7 @@
 NFV RG                                                     CJ. Bernardos
 Internet-Draft                                                      UC3M
 Intended status: Informational                             LM. Contreras
-Expires: March 5, 2018                                               TID
+Expires: September 5, 2018                                           TID
                                                             I. Vaishnavi
                                                                   Huawei
                                                                 R. Szabo
@@ -15,7 +15,7 @@ Expires: March 5, 2018                                               TID
                                               Scuola Superiore Sant'Anna
                                                               J. Mangues
                                                                     CTTC
-                                                          September 2017
+                                                           March 4, 2018
 
 
                   Multi-domain Network Virtualization
@@ -43,19 +43,19 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on March 5, 2018.
+   This Internet-Draft will expire on September 5, 2018.
 
 Copyright Notice
 
-   Copyright (c) 2017 IETF Trust and the persons identified as the
+   Copyright (c) 2018 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
 
 
 
-Bernardos, et al.         Expires March 5, 2018                 [Page 1]
+Bernardos, et al.       Expires September 5, 2018               [Page 1]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Bernardos, et al.         Expires March 5, 2018                 [Page 2]
+Bernardos, et al.       Expires September 5, 2018               [Page 2]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
    grained forwarding of packets (beyond looking at the destination IP
@@ -165,9 +165,9 @@ Internet-Draft     Multi-domain Network Virtualization    September 2017
 
 
 
-Bernardos, et al.         Expires March 5, 2018                 [Page 3]
+Bernardos, et al.       Expires September 5, 2018               [Page 3]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
    providers (e.g., mobile operator, cloud service provider, transport
@@ -221,9 +221,9 @@ Internet-Draft     Multi-domain Network Virtualization    September 2017
 
 
 
-Bernardos, et al.         Expires March 5, 2018                 [Page 4]
+Bernardos, et al.       Expires September 5, 2018               [Page 4]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
       are to be applied.  This is somehow equivalent to the Network
@@ -277,9 +277,9 @@ Internet-Draft     Multi-domain Network Virtualization    September 2017
 
 
 
-Bernardos, et al.         Expires March 5, 2018                 [Page 5]
+Bernardos, et al.       Expires September 5, 2018               [Page 5]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
    +-------------------------------------------+  +---------------+
@@ -333,9 +333,9 @@ Internet-Draft     Multi-domain Network Virtualization    September 2017
 
 
 
-Bernardos, et al.         Expires March 5, 2018                 [Page 6]
+Bernardos, et al.       Expires September 5, 2018               [Page 6]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
    o  Operations and Business Support Systems (OSS/BSS).
@@ -389,9 +389,9 @@ Internet-Draft     Multi-domain Network Virtualization    September 2017
 
 
 
-Bernardos, et al.         Expires March 5, 2018                 [Page 7]
+Bernardos, et al.       Expires September 5, 2018               [Page 7]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
    administrative boundaries are very limited and cumbersome.  This
@@ -445,9 +445,9 @@ Internet-Draft     Multi-domain Network Virtualization    September 2017
 
 
 
-Bernardos, et al.         Expires March 5, 2018                 [Page 8]
+Bernardos, et al.       Expires September 5, 2018               [Page 8]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
    The first option (shown in Figure 3) is based on a split of the NFVO
@@ -501,9 +501,9 @@ Internet-Draft     Multi-domain Network Virtualization    September 2017
 
 
 
-Bernardos, et al.         Expires March 5, 2018                 [Page 9]
+Bernardos, et al.       Expires September 5, 2018               [Page 9]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
    administrative domain is compose of one or more Datacentres, VIMs,
@@ -557,9 +557,9 @@ Internet-Draft     Multi-domain Network Virtualization    September 2017
 
 
 
-Bernardos, et al.         Expires March 5, 2018                [Page 10]
+Bernardos, et al.       Expires September 5, 2018              [Page 10]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
    [etsi_nvf_whitepaper_5g], which provides network operator
@@ -613,9 +613,9 @@ Internet-Draft     Multi-domain Network Virtualization    September 2017
 
 
 
-Bernardos, et al.         Expires March 5, 2018                [Page 11]
+Bernardos, et al.       Expires September 5, 2018              [Page 11]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
       FG_out_N, where VNF-FG_out_j corresponds to a spatial embedding to
@@ -669,9 +669,9 @@ Internet-Draft     Multi-domain Network Virtualization    September 2017
 
 
 
-Bernardos, et al.         Expires March 5, 2018                [Page 12]
+Bernardos, et al.       Expires September 5, 2018              [Page 12]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
                                              Tenants
@@ -725,9 +725,9 @@ Internet-Draft     Multi-domain Network Virtualization    September 2017
 
 
 
-Bernardos, et al.         Expires March 5, 2018                [Page 13]
+Bernardos, et al.       Expires September 5, 2018              [Page 13]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
 5.3.  Cascading
@@ -781,9 +781,9 @@ Internet-Draft     Multi-domain Network Virtualization    September 2017
 
 
 
-Bernardos, et al.         Expires March 5, 2018                [Page 14]
+Bernardos, et al.       Expires September 5, 2018              [Page 14]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
    domain orchestratrators.  Each one of these interfaces could be a
@@ -837,9 +837,9 @@ Internet-Draft     Multi-domain Network Virtualization    September 2017
 
 
 
-Bernardos, et al.         Expires March 5, 2018                [Page 15]
+Bernardos, et al.       Expires September 5, 2018              [Page 15]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
    responsible for exposing the topology and service deployment
@@ -893,9 +893,9 @@ Internet-Draft     Multi-domain Network Virtualization    September 2017
 
 
 
-Bernardos, et al.         Expires March 5, 2018                [Page 16]
+Bernardos, et al.       Expires September 5, 2018              [Page 16]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
    service operators on sub-interface IF2-C.  Resource orchestration
@@ -949,9 +949,9 @@ Internet-Draft     Multi-domain Network Virtualization    September 2017
 
 
 
-Bernardos, et al.         Expires March 5, 2018                [Page 17]
+Bernardos, et al.       Expires September 5, 2018              [Page 17]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
    |          |  |       |       |    |  +------+   |  ||
@@ -1005,9 +1005,9 @@ Internet-Draft     Multi-domain Network Virtualization    September 2017
 
 
 
-Bernardos, et al.         Expires March 5, 2018                [Page 18]
+Bernardos, et al.       Expires September 5, 2018              [Page 18]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
    operators managing a high number of large administrative domains.
@@ -1061,9 +1061,9 @@ Internet-Draft     Multi-domain Network Virtualization    September 2017
 
 
 
-Bernardos, et al.         Expires March 5, 2018                [Page 19]
+Bernardos, et al.       Expires September 5, 2018              [Page 19]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
    provider service decomposition, multi-operator topology and peering
@@ -1117,9 +1117,9 @@ Internet-Draft     Multi-domain Network Virtualization    September 2017
 
 
 
-Bernardos, et al.         Expires March 5, 2018                [Page 20]
+Bernardos, et al.       Expires September 5, 2018              [Page 20]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
 11.  Informative References
@@ -1173,9 +1173,9 @@ Authors' Addresses
 
 
 
-Bernardos, et al.         Expires March 5, 2018                [Page 21]
+Bernardos, et al.       Expires September 5, 2018              [Page 21]
 
-Internet-Draft     Multi-domain Network Virtualization    September 2017
+Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
    Ishan Vaishnavi
@@ -1229,4 +1229,4 @@ Internet-Draft     Multi-domain Network Virtualization    September 2017
 
 
 
-Bernardos, et al.         Expires March 5, 2018                [Page 22]
+Bernardos, et al.       Expires September 5, 2018              [Page 22]
