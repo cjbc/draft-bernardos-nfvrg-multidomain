@@ -118,7 +118,7 @@
                 <email>a.sgambelluri@santannapisa.it</email>
         </address>
     </author>
-    
+
     <author fullname="Josep Mangues-Bafalluy" initials="J" surname="Mangues">
         <organization>CTTC</organization>
         <address>
@@ -146,9 +146,6 @@ This draft analyzes the problem of multi-provider multi-domain orchestration,
 by first scoping the problem, then looking into potential architectural
 approaches, and finally describing the solutions being developed by the
 European 5GEx project. 
-      </t>
-
-      <t>
       </t>
 
     </abstract>
@@ -211,44 +208,45 @@ often require configuring multiple devices in a decentralized way.
       </t>
 	  
 	<t>
-Furthermore, 5G networks are being designed to be capable of fulfilling the needs of
-a plethora of vertical industries (e.g., automotive, eHealth, media), which have a
-wide variety of requirements <xref target="ngmn_5g_whitepaper" />. The slicing concept tries to make the network of the provider aware of 
-the business needs of tenants (e.g., vertical industries) by customizing the share 
-of the network assigned to them. The term network slice was
-coined to refer to a complete logical network composed of network functions and the
-resources to run them <xref target="ngmn_slicing" />. These resources include network, storage, and 
-computing. The way in which services requested by customers of the provider are
-assigned to slices depends on customer needs and provider policies. The system
-must be flexible to accommodate a variety of options. 
+Furthermore, 5G networks are being designed to be capable of fulfilling the
+needs of a plethora of vertical industries (e.g., automotive, eHealth, media),
+which have a wide variety of requirements <xref target="ngmn_5g_whitepaper" />.
+The slicing concept tries to make the network of the provider aware of the
+business needs of tenants (e.g., vertical industries) by customizing the share
+of the network assigned to them. The term network slice was coined to refer to a
+complete logical network composed of network functions and the resources to run
+them <xref target="ngmn_slicing" />. These resources include network, storage,
+and computing. The way in which services requested by customers of the provider
+are assigned to slices depends on customer needs and provider policies. The
+system must be flexible to accommodate a variety of options.
       </t>
 	    
 	  <t>
-Another characteristic of current and future telecommunication networks is complexity.
-It comes from three main aspects. First, heterogeneous technologies are often separated
-in multiple domains under the supervision of different network managers, which exchange
-provisioning orders that are manually handled. This does not only happen between different operators,
-but also inside the network of the same operator. Second, the different regional scope 
-of each operator requires peering with others to extend their reach.
-And third, the increasing variety of interaction among specialized providers (e.g., mobile operator, cloud service
-provider, transport network provider) that complement each other to satisfy the service requests
-from customers. In conclusion, realizing the slicing vision to adapt the network to needs
-of verticals will require handling multi-provider and multi-domain aspects.
+Another characteristic of current and future telecommunication networks is
+complexity. It comes from three main aspects. First, heterogeneous technologies
+are often separated in multiple domains under the supervision of different
+network managers, which exchange provisioning orders that are manually handled.
+This does not only happen between different operators, but also inside the
+network of the same operator. Second, the different regional scope of each
+operator requires peering with others to extend their reach. And third, the
+increasing variety of interaction among specialized providers (e.g., mobile
+operator, cloud service provider, transport network provider) that complement
+each other to satisfy the service requests from customers. In conclusion,
+realizing the slicing vision to adapt the network to needs of verticals will
+require handling multi-provider and multi-domain aspects.
       </t>
-	  
-	  
-      <t>
-Additionally, Network Function Virtualization (NFV) and Software Defined Networking (SDN) are
-changing the way the telecommunications sector will deploy, extend and operate
-its networks. Together, they bring the required programmability and flexibility.
-Moreover, these concepts and network slicing are tightly related. In fact, slices 
-may be implemented as NFV network services. However, building a complete end-to-end logical
-network will likely require stitching services offered by multiple domains from multiple providers.
-This is why multi-domain network virtualization is crucial in 5G networks.
 
-	    </t>
-	    
-	    
+      <t>
+Additionally, Network Function Virtualization (NFV) and Software Defined
+Networking (SDN) are changing the way the telecommunications sector will deploy,
+extend and operate its networks. Together, they bring the required
+programmability and flexibility. Moreover, these concepts and network slicing
+are tightly related. In fact, slices may be implemented as NFV network services.
+However, building a complete end-to-end logical network will likely require
+stitching services offered by multiple domains from multiple providers. This is
+why multi-domain network virtualization is crucial in 5G networks.
+    </t>
+
     </section>
 
     <section anchor="sec:terminology" title="Terminology">
@@ -754,7 +752,6 @@ Tenants       /    *           |Orchestrator  |
 ]]></artwork>
 </figure>      
 
-
       </section> 
 
       <section anchor="sec:cascading" title="Cascading">
@@ -926,18 +923,23 @@ control, resource topology and resource monitoring respectively. Furthermore,
 the sub-interfaces introduced before are generalised and also used for
 interfaces IF3 and IF1.
         </t>
-     <section anchor="sec:interfaces" title="5GEx Multi-Operator Orchestrator Functional Architecture">
+
+      </section>
+
+    </section>
+
+     <section anchor="sec:5gex_arch" title="5GEx Multi-Operator Orchestrator Functional Architecture">
 
         <t>
-		
-The 5G-PPP H2020 5GEx projects addresses the proposal and the deployment 
-of a complete Multi-Provider Orchestrator providing, besides network and 
-service orchestration, service exposition to other providers. The main 
-assumptions of the 5GEx functional architecture are a) a multi-operator 
-wholesale relationship, b) a full multi-vendor inter-operability and
-c) technology-agnostic approach for physical resources. 
-The proposed functional architecture of the 5GEx MPO is depicted in <xref target="fig:5gex_arch" />.
- </t>
+The 5G-PPP H2020 5GEx projects addresses the proposal and the deployment of a
+complete Multi-Provider Orchestrator providing, besides network and service
+orchestration, service exposition to other providers. The main assumptions of
+the 5GEx functional architecture are a) a multi-operator wholesale relationship,
+b) a full multi-vendor inter-operability and c) technology-agnostic approach for
+physical resources. The proposed functional architecture of the 5GEx MPO is
+depicted in <xref target="fig:5gex_arch" />.
+        </t>
+
 <figure anchor="fig:5gex_arch" title=" 5GEx MPO functional architecture" >
 <artwork><![CDATA[
                       ^                          ^
@@ -993,50 +995,55 @@ The proposed functional architecture of the 5GEx MPO is depicted in <xref target
 ]]></artwork>
 </figure>   
 
-		<t>
-Providers expose MPOs service specification API allowing OSS/BSS or 
-external business customers to perform and select their requirements 
-for a service. Interface I1-x is exploited as a northbound API for
-business client requests. 
-Peer MPO-MPO communications implementing multi-operator orchestration
-operate with specific interfaces referred to as I2-x interfaces. A number
-of I2-based interfaces are provided for communication between specific MPO
-modules: I2-S for service orchestration, I2-RC for network resource control,
-I2-F for management lifecycle, I2-Mon for inter-operator monitoring messages,
-I2-RT for resource advertisement, I2-C for service catalogue exchange, 
-I2-RC-network for the QoS connectivity resource control. Some I2 interfaces are bilateral, 
-involving direct relationship between two operators, and utilized to exchange
-business/SLA agreements before entering the federation of inter-operator 
-orchestrators.  
-Each MPO communicates through a set of southbound interface, I3-x, with 
-local orchestrators/controllers/VIM, in order to set/modify/release resources
-identified by the MPO or during inter-MPO orchestration phase. A number of
-I3 interfaces are defined: I3-S for service orchestration towards local 
-NFVO, I3-RC for resource orchestration towards local VIM, I3-C towards local
-service catalogue, I3-RT towards local abstraction topology module, 
-I3-RC-network towards local PCE or network controller, I3-Mon towards local
-Resource Monitoring agent. All the considered interfaces are provided to
-cover either flat orchestration or layered/hierarchical orchestration.
-The possibility of hierarchical inter-provider MPO interaction is enabled
-at a functional level, e.g., in the case of operators managing a high 
-number of large administrative domains. 
-The main MPO modules are the following:
+        <t>
+Providers expose MPOs service specification API allowing OSS/BSS or external
+business customers to perform and select their requirements for a service.
+Interface I1-x is exploited as a northbound API for business client requests.
+Peer MPO-MPO communications implementing multi-operator orchestration operate
+with specific interfaces referred to as I2-x interfaces. A number of I2-based
+interfaces are provided for communication between specific MPO modules: I2-S for
+service orchestration, I2-RC for network resource control, I2-F for management
+lifecycle, I2-Mon for inter-operator monitoring messages, I2-RT for resource
+advertisement, I2-C for service catalogue exchange, I2-RC-network for the QoS
+connectivity resource control. Some I2 interfaces are bilateral, involving
+direct relationship between two operators, and utilized to exchange business/SLA
+agreements before entering the federation of inter-operator orchestrators. Each
+MPO communicates through a set of southbound interface, I3-x, with local
+orchestrators/controllers/VIM, in order to set/modify/release resources
+identified by the MPO or during inter-MPO orchestration phase. A number of I3
+interfaces are defined: I3-S for service orchestration towards local NFVO, I3-RC
+for resource orchestration towards local VIM, I3-C towards local service
+catalogue, I3-RT towards local abstraction topology module, I3-RC-network
+towards local PCE or network controller, I3-Mon towards local Resource
+Monitoring agent. All the considered interfaces are provided to cover either
+flat orchestration or layered/hierarchical orchestration. The possibility of
+hierarchical inter-provider MPO interaction is enabled at a functional level,
+e.g., in the case of operators managing a high number of large administrative
+domains. The main MPO modules are the following:
+
           <list style="empty">
+
             <t>The Inter-provider NFVO, including the RO and the NSO, implementing the
 multi-provider service decomposition</t>
+
             <t>the VNF/Element manager, managing VNF lifecycle, scaling and responsible
 for FCAPS (Fault, Configuration, Accounting, Performance and Security 
 management)</t>
+
             <t>the SLA Manager, in charge of reporting monitoring and performance alerts
 on the service graph</t>
+
             <t>the Service Catalogue, exposing available services to external client 
 and operators</t>
+
             <t>the Topology and Resource Distribution module and Repository, exchanging
 operators topologies (both IT and network resources) and providing abstracted
 view of the own operator topology</t>
+
             <t>the Multi-domain Path Computation Element (PCE implementing inter-operator
 path computation to allow QoS-based connectivity serving VNF-VNF link)</t>
 	</list>
+
 The Inter-provider NVFO selects providers to be involved in the service 
 chained request, according to policy-based decisions and resorting to 
 Inter-Provider topologies and service catalogues advertised through interfaces
@@ -1073,21 +1080,36 @@ latency or minimum TE metric. The multi-domain PCE (MD-PCE) receives the
 connectivity request from the inter-provider NFVO and performs inter-operator
 path computation to instantiate QoS-based connectivity between two VNFs
 (e.g., Label Switched Paths). Two procedures are run sequentially:
+
           <list style="empty">
+
             <t>operators/domain sequence computation, based on the topology database, 
 provided by Topology Distribution module, and on specific policies 
 (e.g., business, bilateral)</t>
+
 	    <t>per-operator connectivity computation and instantiation.</t>
+
 	</list>
+
 In 5GEx, MD-PCE is stateful (i.e., current connectivity information is stored
 inside the PCE) and inter-operator detailed computation is performed resorting
 to the stateful Backward Recursive PCE-based computation (BRPC) 
 [draft-stateful-BRPC], deploying a chain of PCEP sessions among adjacent 
 operators, each one responsible of computing and deploying its segment. 
 Backward recursive procedure allows optimal e2e constrained path computation 
-results.	
-        </t>	
+results.
+
+        </t>
+
       </section>
+
+
+
+
+
+
+
+
 
     <section anchor="sec:iana" title="IANA Considerations">
 
