@@ -91,6 +91,21 @@
         </address>
     </author>
 
+    <author fullname="Josep Mangues-Bafalluy" initials="J" surname="Mangues">
+        <organization>CTTC</organization>
+        <address>
+                <postal>
+                      <street>Av. Carl Friecrish Gauss, 7</street>
+                      <city>Castelldefels</city>
+                      <region>EMEA</region>
+                      <code>08860</code>
+                      <country>Spain</country>
+                </postal>
+                <email>josep.mangues@cttc.cat</email>
+        </address>
+    </author>
+
+	  
     <date month="September" year="2017" />
 
     <area>Internet</area>
@@ -134,7 +149,7 @@ European 5GEx project.
 The telecommunications sector is experiencing a major revolution that will shape
 the way networks and services are designed and deployed for the next decade.
 We are witnessing an explosion in the number of applications and services
-demanded by users, which are now really capable of accessing them on the move.
+demanded by users, which are now really capable of accessing them on the move. 
 In order to cope with such a demand, some network operators are looking at the
 cloud computing paradigm, which enables a potential reduction of the overall
 costs by outsourcing communication services from specific hardware in the
@@ -167,13 +182,46 @@ running operational network due to the high dependency on proprietary (and
 sometime obscure) protocols and interfaces, which are complex to manage and
 often require configuring multiple devices in a decentralized way. 
       </t>
-
-      <t>
-Network Function Virtualization (NFV) and Software Defined Networking (SDN) are
-changing the way the telecommunications sector will deploy, extend and operate
-their networks. TBD: add multi-domain.
+	  
+	<t>
+Furthermore, 5G networks are being designed to be capable of fulfilling the needs of
+a plethora of vertical industries (e.g., automotive, eHealth, media), which have a
+wide variety of requirements <xref target="ngmn_5g_whitepaper" />. The slicing concept tries to make the network of the provider aware of 
+the business needs of tenants (e.g., vertical industries) by customizing the share 
+of the network assigned to them. The term network slice was
+coined to refer to a complete logical network composed of network functions and the
+resources to run them <xref target="ngmn_slicing" />. These resources include network, storage, and 
+computing. The way in which services requested by customers of the provider are
+assigned to slices depends on customer needs and provider policies. The system
+must be flexible to accommodate a variety of options. 
       </t>
+	    
+	  <t>
+Another characteristic of current and future telecommunication networks is complexity.
+It comes from three main aspects. First, heterogeneous technologies are often separated
+in multiple domains under the supervision of different network managers, which exchange
+provisioning orders that are manually handled. This does not only happen between different operators,
+but also inside the network of the same operator. Second, the different regional scope 
+of each operator requires peering with others to extend their reach.
+And third, the increasing variety of interaction among specialized providers (e.g., mobile operator, cloud service
+provider, transport network provider) that complement each other to satisfy the service requests
+from customers. In conclusion, realizing the slicing vision to adapt the network to needs
+of verticals will require handling multi-provider and multi-domain aspects.
+      </t>
+	  
+	  
+      <t>
+Additionally, Network Function Virtualization (NFV) and Software Defined Networking (SDN) are
+changing the way the telecommunications sector will deploy, extend and operate
+its networks. Together, they bring the required programmability and flexibility.
+Moreover, these concepts and network slicing are tightly related. In fact, slices 
+may be implemented as NFV network services. However, building a complete end-to-end logical
+network will likely require stitching services offered by multiple domains from multiple providers.
+This is why multi-domain network virtualization is crucial in 5G networks.
 
+	    </t>
+	    
+	    
     </section>
 
     <section anchor="sec:terminology" title="Terminology">
@@ -924,6 +972,23 @@ this presentation.
         </front>
       </reference>
 
+      <reference anchor="ngmn_5g_whitepaper">
+        <front>
+          <title>5G White Paper</title>
+          <author fullname="NGMN Alliance"/>
+          <date year="2015" month="February"/>
+        </front>
+      </reference>
+
+      <reference anchor="ngmn_slicing">
+        <front>
+          <title>Description of Network Slicing Concept</title>
+          <author fullname="NGMN Alliance"/>
+          <date year="2016" month="January"/>
+        </front>
+      </reference>
+	    
+	    
     </references>
 
   </back>
