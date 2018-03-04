@@ -90,7 +90,35 @@
                 <email>robert.szabo@ericsson.com</email>
         </address>
     </author>
+    
+    <author fullname="Francesco Paolucci" initials="F" surname="Paolucci">
+        <organization>Scuola Superiore Sant'Anna</organization>
+        <address>
+                <postal>
+                      <street>Via Giuseppe Moruzzi, 1</street>
+                      <city>Pisa</city>
+                      <code>56121</code>
+                      <country>Italy</country>
+                </postal>
+                <phone>+395492124</phone>
+                <email>fr.paolucci@santannapisa.it</email>
+        </address>
+    </author>
 
+    <author fullname="Andrea Sgambelluri" initials="A" surname="Sgambelluri">
+        <organization>Scuola Superiore Sant'Anna</organization>
+        <address>
+                <postal>
+                      <street>Via Giuseppe Moruzzi, 1</street>
+                      <city>Pisa</city>
+                      <code>56121</code>
+                      <country>Italy</country>
+                </postal>
+                <phone>+395492132</phone>
+                <email>a.sgambelluri@santannapisa.it</email>
+        </address>
+    </author>
+    
     <author fullname="Josep Mangues-Bafalluy" initials="J" surname="Mangues">
         <organization>CTTC</organization>
         <address>
@@ -105,7 +133,6 @@
         </address>
     </author>
 
-	  
     <date month="September" year="2017" />
 
     <area>Internet</area>
@@ -899,12 +926,168 @@ control, resource topology and resource monitoring respectively. Furthermore,
 the sub-interfaces introduced before are generalised and also used for
 interfaces IF3 and IF1.
         </t>
+     <section anchor="sec:interfaces" title="5GEx Multi-Operator Orchestrator Functional Architecture">
 
+        <t>
+		
+The 5G-PPP H2020 5GEx projects addresses the proposal and the deployment 
+of a complete Multi-Provider Orchestrator providing, besides network and 
+service orchestration, service exposition to other providers. The main 
+assumptions of the 5GEx functional architecture are a) a multi-operator 
+wholesale relationship, b) a full multi-vendor inter-operability and
+c) technology-agnostic approach for physical resources. 
+The proposed functional architecture of the 5GEx MPO is depicted in <xref target="fig:5gex_arch" />.
+ </t>
+<figure anchor="fig:5gex_arch" title=" 5GEx MPO functional architecture" >
+<artwork><![CDATA[
+                      ^                          ^
+                 I1-S |                          |
+                 I1-F |                     I1-C |
+                 I1-RM|                          |
++----------------------------------------------------+
+|          +-------------------------------------|--+|
+|          |          |                          |  ||     I2-S
+|          | +--------------------+              |  ||     I2-F
+|+---+     | | +-----+ +---+ IP-  |              |  ||     I2-RC
+||OSS|<----|-| | NSO | |RO | NFVO +<-------------|--+|-------------->
+|+---+     | | +-----+ +---+      |<-------------+  ||
+|  ^       | +---^----------------+              |  ||
+|  |       |     |     ^ ^    ^^ ^               |  ||
+|  |       | +---+---+ | |    || |               |  ||
+|  +---------| VNF   | | |    || |  Multi-       |  ||
+|          | |Manager| | |    || |  Provider     |  ||
+|          | ++------+ | |    || |  Orchestrator |  ||
+|          |  ^        | |    || |  (MPO)        |  ||
+|          |  +--------+ |    || |               |  ||
+|          |  |     +-------+ || |               |  ||    I2-Mon
+|          |  |     |SLA    |<-|-|---------------|--+|-------------->
+|          |  |     |Manager| || |               |  ||
+|          |  |     +-------+ || |               |  ||
+|          |  |       ^       || +------------+  |  ||I2-RT-advertise
+|          |  |       |       || |Topology    |  |  ||I2-RT-bilateral
+|          |  |       |       || |Distribution|<-|--+|-------------->
+|          |  |       |       || |Repository  |  |  ||
+|          |  |       |       || +--------^+--+  |  ||
+|          |  |       |       ||   ^      ||     |  ||
+|          |  |       |       ||   |  +---+v-+   |  ||I2-RC-network
+|          |  |       |       |+---|--+MD-PCE|<--|--+|-------------->
+|          |  |       |       |    |  +------+   |  ||
+|          |  |       |       |    |   ^ +-------+-+||I2-C-advertise
+|          |  |       |       |    |   | |Service  |||I2-C-bilateral
+|          |  |       |       |    |   | |Catalogue+<|-------------->
+|          |  |       |       |    |   | +---------+||
+|          |  |       |       |    |   |      ^     ||
+|          +--|----- -|-------|----|---|------|-----+|
+|             |       |            |   |      |      |
+|             |I3-RC  |   I3-S|    |   |I3-RC-network|
+|          +--+--+    |   +----+   | +---+    |      |
+|          | VIM |    |   |NFVO|   | |PCE|    |      |
+|          +-----+    |   +----+   | +---+    |      |
+|                     |            |          |      |
+|                     |       I3-RT|          |I3-C  |
+|              I3-Mon |     +------+----+ +---+-----+|
+|           +---------+-+   |Topology   | |Service  ||
+|Operator   | Monitoring|   |Abstraction| |Catalogue||
+|Domain     +-----------+   +-----------+ +---------+|
++----------------------------------------------------+
+]]></artwork>
+</figure>   
+
+		<t>
+Providers expose MPOs service specification API allowing OSS/BSS or 
+external business customers to perform and select their requirements 
+for a service. Interface I1-x is exploited as a northbound API for
+business client requests. 
+Peer MPO-MPO communications implementing multi-operator orchestration
+operate with specific interfaces referred to as I2-x interfaces. A number
+of I2-based interfaces are provided for communication between specific MPO
+modules: I2-S for service orchestration, I2-RC for network resource control,
+I2-F for management lifecycle, I2-Mon for inter-operator monitoring messages,
+I2-RT for resource advertisement, I2-C for service catalogue exchange, 
+I2-RC-network for the QoS connectivity resource control. Some I2 interfaces are bilateral, 
+involving direct relationship between two operators, and utilized to exchange
+business/SLA agreements before entering the federation of inter-operator 
+orchestrators.  
+Each MPO communicates through a set of southbound interface, I3-x, with 
+local orchestrators/controllers/VIM, in order to set/modify/release resources
+identified by the MPO or during inter-MPO orchestration phase. A number of
+I3 interfaces are defined: I3-S for service orchestration towards local 
+NFVO, I3-RC for resource orchestration towards local VIM, I3-C towards local
+service catalogue, I3-RT towards local abstraction topology module, 
+I3-RC-network towards local PCE or network controller, I3-Mon towards local
+Resource Monitoring agent. All the considered interfaces are provided to
+cover either flat orchestration or layered/hierarchical orchestration.
+The possibility of hierarchical inter-provider MPO interaction is enabled
+at a functional level, e.g., in the case of operators managing a high 
+number of large administrative domains. 
+The main MPO modules are the following:
+          <list style="empty">
+            <t>The Inter-provider NFVO, including the RO and the NSO, implementing the
+multi-provider service decomposition</t>
+            <t>the VNF/Element manager, managing VNF lifecycle, scaling and responsible
+for FCAPS (Fault, Configuration, Accounting, Performance and Security 
+management)</t>
+            <t>the SLA Manager, in charge of reporting monitoring and performance alerts
+on the service graph</t>
+            <t>the Service Catalogue, exposing available services to external client 
+and operators</t>
+            <t>the Topology and Resource Distribution module and Repository, exchanging
+operators topologies (both IT and network resources) and providing abstracted
+view of the own operator topology</t>
+            <t>the Multi-domain Path Computation Element (PCE implementing inter-operator
+path computation to allow QoS-based connectivity serving VNF-VNF link)</t>
+	</list>
+The Inter-provider NVFO selects providers to be involved in the service 
+chained request, according to policy-based decisions and resorting to 
+Inter-Provider topologies and service catalogues advertised through interfaces
+I2-RT-advertise and I2-C-advertise, respectively. Network/service requests are
+sent to other providers using the I2-RC and I2-S interfaces, respectively. 
+Policy enforcement for authorized providers running resource orchestration 
+and lifecycle management are exploited through interfaces I2-RC and I2-F, respectively.
+The VNF/Element Manager is in charge of managing the lifecycle of the VNFs part of the services.
+More specifically, it is in charge to perform: the configuration of the VNFs, also in terms of security aspects,
+the faul recovery and the scaling according to their performance.
+The SLA Manager collects and aggregates quality measurement reports from probes
+deployed by the Inter-Provider NFVO as part of the service setup. Measurements
+results at the Manager represent aggregated results and are computed and 
+stored utilizing the I2-Mon interface between Inter-Provider MPOs sharing the
+same service. Faults and alarms are moreover correlated to raise SLA violation
+to remote inter-provider MPOs and, optionally, to detect the source and the
+location of the violation, triggering service re-computation/rerouting procedures. 
+The Service Catalogue stores information on network services and available VNFs
+and uses I2-C interfaces (either bilateral or advertised) to advertise and 
+updating such offered services to other operators.
+To enable inter-provider service decomposition, multi-operator topology and 
+peering relationships need to be advertised. Providers advertise basic 
+inter-provider topologies using the I2-RT-advertse interface including, 
+optionally, abstracted network resources, overall  IT resource capabilities, 
+MPO entry-point and MD-PCE IP address. Basic advertisement takes place between adjacent operators. These
+information are collected, filtered by policy rules and propagated hop-by-hop.
+In 5GEx, the I2-RT-advertise interfaces utilizes BGP-LS protocol. Moreover, 
+providers establish point-to-point bilateral (i.e., direct and exclusive) 
+communications to exchange additional topology and business information,
+using the I2-RT-bilateral interface.  
+Service decomposition may imply the instantiation of traffic-engineered
+multi-provider connectivity, subject to constraints such as guaranteed bandwidth,
+latency or minimum TE metric. The multi-domain PCE (MD-PCE) receives the 
+connectivity request from the inter-provider NFVO and performs inter-operator
+path computation to instantiate QoS-based connectivity between two VNFs
+(e.g., Label Switched Paths). Two procedures are run sequentially:
+          <list style="empty">
+            <t>operators/domain sequence computation, based on the topology database, 
+provided by Topology Distribution module, and on specific policies 
+(e.g., business, bilateral)</t>
+	    <t>per-operator connectivity computation and instantiation.</t>
+	</list>
+In 5GEx, MD-PCE is stateful (i.e., current connectivity information is stored
+inside the PCE) and inter-operator detailed computation is performed resorting
+to the stateful Backward Recursive PCE-based computation (BRPC) 
+[draft-stateful-BRPC], deploying a chain of PCEP sessions among adjacent 
+operators, each one responsible of computing and deploying its segment. 
+Backward recursive procedure allows optimal e2e constrained path computation 
+results.	
+        </t>	
       </section>
-
-
-    </section>
-
 
     <section anchor="sec:iana" title="IANA Considerations">
 
