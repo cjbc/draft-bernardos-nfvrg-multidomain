@@ -86,7 +86,7 @@ Table of Contents
    2.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   4
    3.  Background: the ETSI NFV
        architecture  . . . . . . . . . . . . . . . . . . . . . . . .   5
-   4.  Multidomain problem statement . . . . . . . . . . . . . . . .   8
+   4.  Multi-domain problem statement  . . . . . . . . . . . . . . .   8
    5.  Multi-domain architectural approaches . . . . . . . . . . . .   9
      5.1.  ETSI NFV approaches . . . . . . . . . . . . . . . . . . .   9
      5.2.  Hierarchical  . . . . . . . . . . . . . . . . . . . . . .  17
@@ -429,7 +429,7 @@ Internet-Draft     Multi-domain Network Virtualization        March 2018
 
                  Figure 2: ETSI NFV reference architecture
 
-4.  Multidomain problem statement
+4.  Multi-domain problem statement
 
    Market fragmentation results from having a multitude of
    telecommunications network and cloud operators each with a footprint
@@ -1027,7 +1027,7 @@ Internet-Draft     Multi-domain Network Virtualization        March 2018
                   *      E/NSO|     | I/RO     /
                    *.---------'   +-+---------+--+
                    /*             |MP-NFVO/RO:   |
-                  /  *            |Rersource     |
+                  /  *            |Resource      |
    Tenants       /    *           |Orchestrator  |
    |             |     *          +--+---+-------+
    | +-----------+--+   *************|***|********************
@@ -1038,7 +1038,7 @@ Internet-Draft     Multi-domain Network Virtualization        March 2018
    |   |I/NSO |I/RO    |                *           |
    |   |   +--+--------+--+             *           |
    |   |   |MP-NFVO/RO:   |             *           |
-   |   |   |Rersource     |             *           |
+   |   |   |Resource      |             *           |
     \  |   |Orchestrator  |             *    +------+-------+
      \ |   +----+---- --+-+             *    |VIM:          |
     +--+-----+  |I/RO   |I/VIM          *    |Virtualized   |
@@ -1124,7 +1124,7 @@ Internet-Draft     Multi-domain Network Virtualization        March 2018
 
    domain orchestratrators.  Each one of these interfaces could be a
    possible standardization candidate.  Interface 1 is exposed to the
-   tennnt who could request his specific services and/or slices to be
+   tenant who could request his specific services and/or slices to be
    deployed.  Interface 2 is between the orchestrator and is a key
    interface to enable multi-provider operation.  Interface 3 focuses on
    abstracting the technology or vendor dependent implementation details
@@ -1143,9 +1143,9 @@ Internet-Draft     Multi-domain Network Virtualization        March 2018
    within the MPO.  This assurance function collects the appropriate
    information over IF2 and IF3 and reports the performance back to the
    tenant over IF1.  The assurance is also responsible for detecting any
-   failures in the service and violations in the SLA and recomending to
+   failures in the service and violations in the SLA and recommending to
    the orchestration engine the reconfiguration of the service or slice
-   which again needs to performed over IF2 and IF3.
+   which again needs to be performed over IF2 and IF3.
 
    Each of the three steps is assigned to a specific block in our high
    level architecture shown in Figure 12.
@@ -1181,12 +1181,12 @@ Internet-Draft     Multi-domain Network Virtualization        March 2018
    responsible for exposing the topology and service deployment
    capabilities to the other domain.  The exposure over interface 2 to
    other MPO maybe abstracted and the mapping of this abstracted view to
-   the real view when requested byt he NFVO.
+   the real view when requested by the NFVO.
 
    The NFVO (Network Function Virtualization Orchestrator) is
    responsible for the second step.  It deploys the service or slice as
    is received from the tenant over IF2 and IF3.  It then hands over the
-   deployment decisions to the Assurance managmeent subsystem which use
+   deployment decisions to the Assurance management subsystem which use
    this information to collect the periodic monitoring tickets in step
    3.  On the other end it is responsible for receiving the request over
    IF2 to deploy a part of the service, consult with the catalogue and
@@ -1200,8 +1200,8 @@ Internet-Draft     Multi-domain Network Virtualization        March 2018
    results to report the overall service performance to the tenant or
    the requesting MPO as well as to ensure that the service is
    functioning within the specified parameters.  In case of failures or
-   violations the Assurance management system recomends reconfigurations
-   to the NFVO.
+   violations the Assurance management system recommends
+   reconfigurations to the NFVO.
 
 6.1.  Interworking interfaces
 
@@ -1381,7 +1381,7 @@ Internet-Draft     Multi-domain Network Virtualization        March 2018
    I2-F, respectively.  The VNF/Element Manager is in charge of managing
    the lifecycle of the VNFs part of the services.  More specifically,
    it is in charge to perform: the configuration of the VNFs, also in
-   terms of security aspects, the faul recovery and the scaling
+   terms of security aspects, the fault recovery and the scaling
    according to their performance.  The SLA Manager collects and
    aggregates quality measurement reports from probes deployed by the
    Inter-Provider NFVO as part of the service setup.  Measurements
@@ -1440,7 +1440,7 @@ Internet-Draft     Multi-domain Network Virtualization        March 2018
    5G-TRANSFORMER project proposes a flexible and adaptable SDN/NFV-
    based design of the next generation Mobile Transport Networks,
    capable of simultaneously supporting the needs of various vertical
-   industries with diverse range of requirements by offereing customized
+   industries with diverse range of requirements by offering customized
    slices.  In this design, multi-domain orchestration and federation
    are considered as the key concepts to enable end-to-end orchestration
    of services and resources across multiple administrative domains.
@@ -1482,10 +1482,10 @@ Internet-Draft     Multi-domain Network Virtualization        March 2018
        transport network, computing and storage infrastructure.  It also
        may (de)abstract de MTP resources offered to the SO.
 
-   The 5G-TRANSFROMER architecture is quite inline with the general
-   Multi Domain Multi Provider reference architecture dipicted in
-   Figure 11.  Its mapping to the refernce architecture is illustrated
-   in the Fig. below.
+   The 5G-TRANSFROMER architecture is quite in line with the general
+   Multi Domain Multi Provider reference architecture depicted in
+   Figure 11.  Its mapping to the reference architecture is illustrated
+   in the figure below.
 
                _________                       _________
               |         |                     |         |
@@ -1514,28 +1514,28 @@ Bernardos, et al.       Expires September 6, 2018              [Page 27]
 Internet-Draft     Multi-domain Network Virtualization        March 2018
 
 
-   The MTP would be mapped to the invididual domain orchestratrators,
-   which only provides the resource orchestration for the local
-   administrative domain.  The role of the SO is the Multi Provider
-   orchestrator (MPO) repsonsible for multi-domain service or resource
-   orchestration and fedration.  The operation of the SO follows three
-   main technical steps handled by the three function components of the
-   MPO shown in Figure 14, namely (i) the catalogue and topology
-   management system; (ii) the NFVO (Network Function Virtualization
-   Orchestrator); and the assurance management component.
+   The MTP would be mapped to the individual domain orchestrators, which
+   only provides the resource orchestration for the local administrative
+   domain.  The role of the SO is the Multi Provider orchestrator (MPO)
+   responsible for multi-domain service or resource orchestration and
+   federation.  The operation of the SO follows three main technical
+   steps handled by the three function components of the MPO shown in
+   Figure 14, namely (i) the catalogue and topology management system;
+   (ii) the NFVO (Network Function Virtualization Orchestrator); and the
+   assurance management component.
 
    Correspondingly, the interface between the SO and the VS (So-Vs) is
    the interface 1 (IF1), through which the VS requests the
    instantiation and deployment of various network services to support
-   indiviudual vertical serivce slices.  The interface between the SOs
+   individual vertical service slices.  The interface between the SOs
    (So-So) of different domains is the interface 2 (IF2), enabling multi
    domain orchestration and federation operations.  The interface
    between the SO and the MTP (So-Mtp) is the interface 3 (IF3).  It, on
    the one hand, provides the SO the updated global view of the
    underlying infrastructure topology abstraction exposed by the MTP
-   domain orchestrators, whiel on the other hand it also handles command
+   domain orchestrators, while on the other hand it also handles command
    and control functions to allow the SO request each MTP domain for
-   virtual resoruce allocation.
+   virtual resource allocation.
 
    In 5G-TRANSFOMER, a set of sub-interfaces have been defined for the
    So-Mtp, So-So and Vs-So interfaces.
@@ -1601,14 +1601,14 @@ Internet-Draft     Multi-domain Network Virtualization        March 2018
       this reference point.
 
       So-So(-CAT), for the management of Network Service Descriptors
-      (NSDs) flavours together with VNF/VA and MEC Application Packages,
+      (NSDs) flavors together with VNF/VA and MEC Application Packages,
       including their Application Descriptors (AppDs).  This reference
       point offers primitives for on-boarding, removal, updates, queries
       and enabling/disabling of descriptors and packages.  The SO NFVO-
       NSO uses this reference point.
 
    Furthermore, resource orchestration related operations are broken up
-   to the followng sub-interfaces to reflect resource control, resource
+   to the following sub-interfaces to reflect resource control, resource
    topology and resource monitoring respectively.
 
       So-So(-RM), for allocating, configuring, updating and releasing
@@ -1648,7 +1648,7 @@ Internet-Draft     Multi-domain Network Virtualization        March 2018
    and IF2-C are defined to perform network service-related operations
    between MPOs of different administrative domains.  The IF2-RC,
    IF2-RT, IF2-RMon sub-interfaces are defined to regulated interactions
-   between Catalogue and Topologu Management compoents.  Their mapping
+   between Catalogue and Topology Management components.  Their mapping
    to the sub-interfaces defined in 5G-TRANSFORMER are summarized as
    follows:
 
@@ -1693,7 +1693,7 @@ Internet-Draft     Multi-domain Network Virtualization        March 2018
       VNF Descriptors (VNFDs), and Application Packages, including their
       Application Descriptors (AppDs).  It offers primitives for on-
       boarding, removal, updates, queries and enabling/disabling of
-      descriptors and packages.  It maps to IF1-C subinterface of the
+      descriptors and packages.  It maps to IF1-C sub-interface of the
       reference architecture.
 
    In the reference architecture (Figure 11), the sub-interface IF1-S
@@ -1766,7 +1766,7 @@ Internet-Draft     Multi-domain Network Virtualization        March 2018
    As a summary it can be stated that it is still early days for the
    technology implemented in a referenced NFV orchestration projects and
    federation use case in not on a radar for these projects for the
-   moment.  However, it is expected that upon matury of the federation
+   moment.  However, it is expected that upon maturity of the federation
    as a viable market use case appropriate feature set in the reviewed
    projects will be developed.
 

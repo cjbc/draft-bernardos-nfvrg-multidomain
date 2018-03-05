@@ -25,7 +25,8 @@
     <!-- AUTHORS -->
     <author fullname="Carlos J. Bernardos"
             initials="CJ."
-            surname="Bernardos">
+            surname="Bernardos"
+            role="editor">
       <organization abbrev="UC3M">
         Universidad Carlos III de Madrid
       </organization>
@@ -549,7 +550,7 @@ Operations and Business Support Systems (OSS/BSS).
 
     </section>
 
-    <section anchor="sec:ps" title="Multidomain problem statement">
+    <section anchor="sec:ps" title="Multi-domain problem statement">
 
       <t>
 Market fragmentation results from having a multitude of telecommunications
@@ -1050,7 +1051,7 @@ how much they may differ from their existing counterparts. For example, are
                *      E/NSO|     | I/RO     /
                 *.---------'   +-+---------+--+
                 /*             |MP-NFVO/RO:   |
-               /  *            |Rersource     |
+               /  *            |Resource      |
 Tenants       /    *           |Orchestrator  |
 |             |     *          +--+---+-------+
 | +-----------+--+   *************|***|********************
@@ -1061,7 +1062,7 @@ Tenants       /    *           |Orchestrator  |
 |   |I/NSO |I/RO    |                *           |
 |   |   +--+--------+--+             *           |
 |   |   |MP-NFVO/RO:   |             *           |
-|   |   |Rersource     |             *           |
+|   |   |Resource      |             *           |
  \  |   |Orchestrator  |             *    +------+-------+
   \ |   +----+---- --+-+             *    |VIM:          |
  +--+-----+  |I/RO   |I/VIM          *    |Virtualized   |
@@ -1140,7 +1141,7 @@ The figure shows the Multi Provider orchestrator exposing an interface 1 (IF1)
 to the tenant, interface 2 (IF2) to other Multi Provider Orchestrator (MPO) and
 an interface 3 (IF3) to individual domain orchestratrators. Each one of these
 interfaces could be a possible standardization candidate. Interface 1 is exposed
-to the tennnt who could request his specific services and/or slices to be
+to the tenant who could request his specific services and/or slices to be
 deployed. Interface 2 is between the orchestrator and is a key interface to
 enable multi-provider operation. Interface 3 focuses on abstracting the
 technology or vendor dependent implementation details to support orchestration. 
@@ -1159,8 +1160,8 @@ specific assurance management is started  within the MPO. This assurance
 function collects the appropriate information over IF2 and IF3 and reports the
 performance back to the tenant over IF1. The assurance is also responsible for
 detecting any failures in the service and violations in the SLA and
-recomending to the orchestration engine the reconfiguration of the service or
-slice which again needs to performed over IF2 and IF3. 
+recommending to the orchestration engine the reconfiguration of the service or
+slice which again needs to be performed over IF2 and IF3. 
       </t>
 
       <t>
@@ -1193,14 +1194,14 @@ detected topology is provided to the user over IF1. In turn the catalogue and
 topology management system is also responsible for exposing the topology and
 service deployment capabilities to the other domain. The exposure over
 interface 2 to other MPO maybe abstracted and the mapping of this abstracted
-view to the real view when requested byt he NFVO.
+view to the real view when requested by the NFVO.
       </t>
 
       <t>
 The NFVO (Network Function Virtualization Orchestrator) is responsible for the
 second step. It deploys the service or slice as is received from the tenant
 over IF2 and IF3. It then hands over the deployment decisions to the Assurance
-managmeent subsystem which use this information to collect the periodic
+management subsystem which use this information to collect the periodic
 monitoring tickets in step 3. On the other end it is responsible for receiving
 the request over IF2 to deploy a part of the service, consult with the
 catalogue and topology management system on the translation of the abstraction
@@ -1214,7 +1215,7 @@ The assurance management component periodically studies the collected results
 to report the overall service performance to the tenant or the requesting MPO
 as well as to ensure that the service is functioning within the specified
 parameters. In case of failures or violations the Assurance management system
-recomends reconfigurations to the NFVO.
+recommends reconfigurations to the NFVO.
       </t>
 
       <section anchor="sec:interfaces" title="Interworking interfaces">
@@ -1248,7 +1249,7 @@ interfaces IF3 and IF1.
 
       </section>
 
-      <section anchor="sec:5gex_arch" title="5GEx Multi-Operator Orchestrator Functional Architecture">
+      <section anchor="sec:5gex_arch" title="5GEx Multi Architecture">
 
         <t>
 The 5G-PPP H2020 5GEx projects addresses the proposal and the deployment of a
@@ -1385,7 +1386,7 @@ for authorized providers running resource orchestration and lifecycle management
 are exploited through interfaces I2-RC and I2-F, respectively. The VNF/Element
 Manager is in charge of managing the lifecycle of the VNFs part of the services.
 More specifically, it is in charge to perform: the configuration of the VNFs,
-also in terms of security aspects, the faul recovery and the scaling according
+also in terms of security aspects, the fault recovery and the scaling according
 to their performance. The SLA Manager collects and aggregates quality
 measurement reports from probes deployed by the Inter-Provider NFVO as part of
 the service setup. Measurements results at the Manager represent aggregated
@@ -1444,7 +1445,7 @@ results.
 5G-TRANSFORMER project proposes a flexible and adaptable SDN/NFV-based design of
 the next generation Mobile Transport Networks, capable of simultaneously
 supporting the needs of various vertical industries with diverse range of
-requirements by offereing customized slices. In this design, multi-domain
+requirements by offering customized slices. In this design, multi-domain
 orchestration and federation are considered as the key concepts to enable
 end-to-end orchestration of services and resources across multiple
 administrative domains.
@@ -1488,10 +1489,10 @@ also may (de)abstract de MTP resources offered to the SO.
           </t>
 
           <t>
-The 5G-TRANSFROMER architecture is quite inline with the general Multi Domain
-Multi Provider reference architecture dipicted in <xref
-target="fig:multi_domain_arch" />. Its mapping to the refernce architecture is
-illustrated in the Fig. below.
+The 5G-TRANSFROMER architecture is quite in line with the general Multi Domain
+Multi Provider reference architecture depicted in <xref
+target="fig:multi_domain_arch" />. Its mapping to the reference architecture is
+illustrated in the figure below.
 
 <figure anchor="fig:5gt_arch" title="5G-TRANSFORMER architecture mapped to the reference architecture" >
 <artwork><![CDATA[
@@ -1516,10 +1517,10 @@ illustrated in the Fig. below.
           </t>
 
           <t>
-The MTP would be mapped to the invididual domain orchestratrators, which only
+The MTP would be mapped to the individual domain orchestrators, which only
 provides the resource orchestration for the local administrative domain. The
-role of the SO is the Multi Provider orchestrator (MPO) repsonsible for
-multi-domain service or resource orchestration and fedration. The operation of
+role of the SO is the Multi Provider orchestrator (MPO) responsible for
+multi-domain service or resource orchestration and federation. The operation of
 the SO follows three main technical steps handled by the three function
 components of the MPO shown in <xref target="fig:5gt_arch" />, namely (i) the
 catalogue and topology management system; (ii) the NFVO (Network Function
@@ -1529,14 +1530,14 @@ Virtualization Orchestrator); and the assurance management component.
           <t>
 Correspondingly, the interface between the SO and the VS (So-Vs) is the
 interface 1 (IF1), through which the VS requests the instantiation and
-deployment of various network services to support indiviudual vertical serivce
+deployment of various network services to support individual vertical service
 slices. The interface between the SOs (So-So) of different domains is the
 interface 2 (IF2), enabling multi domain orchestration and federation
 operations. The interface between the SO and the MTP (So-Mtp) is the interface 3
 (IF3). It, on the one hand, provides the SO the updated global view of the
 underlying infrastructure topology abstraction exposed by the MTP domain
-orchestrators, whiel on the other hand it also handles command and control
-functions to allow the SO request each MTP domain for virtual resoruce
+orchestrators, while on the other hand it also handles command and control
+functions to allow the SO request each MTP domain for virtual resource
 allocation.
           </t>
 
@@ -1621,7 +1622,7 @@ network service failures. The SO NFVO-NSO uses this reference point.
                 </t>
 
                 <t>
-So-So(-CAT), for the management of Network Service Descriptors (NSDs) flavours
+So-So(-CAT), for the management of Network Service Descriptors (NSDs) flavors
 together with VNF/VA and MEC Application Packages, including their Application
 Descriptors (AppDs). This reference point offers primitives for on-boarding,
 removal, updates, queries and enabling/disabling of descriptors and packages.
@@ -1634,7 +1635,7 @@ The SO NFVO-NSO uses this reference point.
 
             <t>
 Furthermore, resource orchestration related operations are broken up to the
-followng sub-interfaces to reflect resource control, resource topology and
+following sub-interfaces to reflect resource control, resource topology and
 resource monitoring respectively.
             </t>
 
@@ -1680,7 +1681,7 @@ In the reference architecture (<xref target="fig:multi_domain_arch" />), the
 sub-interface IF2-S and IF2-C are defined to perform network service-related
 operations between MPOs of different administrative domains. The IF2-RC, IF2-RT,
 IF2-RMon sub-interfaces are defined to regulated interactions between Catalogue
-and Topologu Management compoents. Their mapping to the sub-interfaces defined
+and Topology Management components. Their mapping to the sub-interfaces defined
 in 5G-TRANSFORMER are summarized as follows:
 
               <list style="bullets">
@@ -1736,7 +1737,7 @@ Vs-So(-CAT). It deals with the catalogue (CAT) management of Network Service
 Descriptors (NSDs), VNF packages, including their VNF Descriptors (VNFDs), and
 Application Packages, including their Application Descriptors (AppDs). It offers
 primitives for on-boarding, removal, updates, queries and enabling/disabling of
-descriptors and packages. It maps to IF1-C subinterface of the reference
+descriptors and packages. It maps to IF1-C sub-interface of the reference
 architecture.
                 </t>
 
@@ -1815,7 +1816,7 @@ the upper layers.
 As a summary it can be stated that it is still early days for the technology
 implemented in a referenced NFV orchestration projects and federation use case
 in not on a radar for these projects for the moment. However, it is expected
-that upon matury of the federation as a viable market use case appropriate
+that upon maturity of the federation as a viable market use case appropriate
 feature set in the reviewed projects will be developed.
       </t>
 
